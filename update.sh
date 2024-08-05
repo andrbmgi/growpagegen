@@ -1,10 +1,16 @@
 #!/bin/bash
 
 # Path to the virtual environment
-VENV_PATH="./venv"
+VENV_PATH="venv"
+
+# Check if the virtual environment directory exists
+if [ ! -d "$VENV_PATH" ]; then
+  echo "Virtual environment not found at $VENV_PATH"
+  exit 1
+fi
 
 # Activate the virtual environment
-source "$VENV_PATH/bin/activate"
+. $VENV_PATH/bin/activate
 
 # Check if the virtual environment activation was successful
 if [ $? -ne 0 ]; then
@@ -12,8 +18,8 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Run the gen.py script
-python gen.py
+# Run the gen.py script using the virtual environment's Python interpreter
+"$VENV_PATH/bin/python" gen.py
 
 # Check if gen.py ran successfully
 if [ $? -ne 0 ]; then
