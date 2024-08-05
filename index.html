@@ -63,7 +63,33 @@
                     yaxis: {
                         title: 'Inverted Moisture Values',
                         autorange: true
-                    }
+                    },
+                    shapes: [
+                        {
+                            type: 'line',
+                            x0: timestamps[0],
+                            y0: -1700,
+                            x1: timestamps[timestamps.length - 1],
+                            y1: -1700,
+                            line: {
+                                color: 'red',
+                                width: 2,
+                                dash: 'dot'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            x0: timestamps[0],
+                            y0: -1620,
+                            x1: timestamps[timestamps.length - 1],
+                            y1: -1620,
+                            line: {
+                                color: 'green',
+                                width: 2,
+                                dash: 'dot'
+                            }
+                        }
+                    ]
                 };
 
                 const config = { responsive: true };
