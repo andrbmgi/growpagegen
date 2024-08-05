@@ -52,11 +52,33 @@
                         rangeslider: {}
                     },
                     yaxis: {
-                        title: 'Inverted Moisture Values'
+                        title: 'Inverted Moisture Values',
+                        autorange: true
                     }
                 };
 
-                Plotly.newPlot('graph', [trace1, trace2], layout);
+                const config = { responsive: true };
+
+                Plotly.newPlot('graph', [trace1, trace2], layout, config);
+
+                // Adjust y-axis range on x-axis zoom
+                document.getElementById('graph').on('plotly_relayout', function(eventdata) {
+                    if (eventdata['xaxis.range[0]'] && eventdata['xaxis.range[1]']) {
+                        const xRange = [new Date(eventdata['xaxis.range[0]']), new Date(eventdata['xaxis.range[1]'])];
+                        const filteredData1 = invertedMoist1.filter((_, i) => {
+                            const timestamp = new Date(timestamps[i]);
+                            return timestamp >= xRange[0] && timestamp <= xRange[1];
+                        });
+                        const filteredData2 = invertedMoist2.filter((_, i) => {
+                            const timestamp = new Date(timestamps[i]);
+                            return timestamp >= xRange[0] && timestamp <= xRange[1];
+                        });
+                        const allFilteredData = filteredData1.concat(filteredData2);
+
+                        const newYRange = [Math.min(...allFilteredData), Math.max(...allFilteredData)];
+                        Plotly.relayout('graph', 'yaxis.range', newYRange);
+                    }
+                });
             });
     </script>
 </body>
