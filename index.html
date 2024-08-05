@@ -28,6 +28,7 @@
                 const timestamps = data.map(item => item['timestamp']);
                 const invertedMoist1 = data.map(item => -item['moist1']);
                 const invertedMoist2 = data.map(item => -item['moist2']);
+                const smoothedAverageMoist = data.map(item => item['smoothed_average_moist']);
 
                 const trace1 = {
                     x: timestamps,
@@ -45,6 +46,14 @@
                     type: 'scatter'
                 };
 
+                const trace3 = {
+                    x: timestamps,
+                    y: smoothedAverageMoist,
+                    mode: 'lines',
+                    name: 'Smoothed Average Moisture',
+                    type: 'scatter'
+                };
+
                 const layout = {
                     title: 'Moisture Data Over Time',
                     xaxis: {
@@ -59,7 +68,7 @@
 
                 const config = { responsive: true };
 
-                Plotly.newPlot('graph', [trace1, trace2], layout, config);
+                Plotly.newPlot('graph', [trace1, trace2, trace3], layout, config);
 
                 // Adjust y-axis range on x-axis zoom
                 document.getElementById('graph').on('plotly_relayout', function(eventdata) {
@@ -73,7 +82,11 @@
                             const timestamp = new Date(timestamps[i]);
                             return timestamp >= xRange[0] && timestamp <= xRange[1];
                         });
-                        const allFilteredData = filteredData1.concat(filteredData2);
+                        const filteredData3 = smoothedAverageMoist.filter((_, i) => {
+                            const timestamp = new Date(timestamps[i]);
+                            return timestamp >= xRange[0] && timestamp <= xRange[1];
+                        });
+                        const allFilteredData = filteredData1.concat(filteredData2, filteredData3);
 
                         const newYRange = [Math.min(...allFilteredData), Math.max(...allFilteredData)];
                         Plotly.relayout('graph', 'yaxis.range', newYRange);
