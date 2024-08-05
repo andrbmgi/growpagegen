@@ -28,7 +28,7 @@
                 const timestamps = data.map(item => item['timestamp']);
                 const invertedMoist1 = data.map(item => -item['moist1']);
                 const invertedMoist2 = data.map(item => -item['moist2']);
-                const smoothedAverageMoist = data.map(item => item['smoothed_average_moist']);
+                const smoothedAverageMoist = data.map(item => -item['smoothed_average_moist']);
 
                 const trace1 = {
                     x: timestamps,
