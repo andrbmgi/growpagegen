@@ -8,6 +8,8 @@ from time import sleep
 import config
 
 import pymongo
+import pandas as pd
+from datetime import datetime
 
 
 # Connect to the MongoDB database
@@ -45,10 +47,18 @@ data = list(collection.find({}))
 # Convert MongoDB documents to JSON serializable format
 for document in data:
     document["_id"] = str(document["_id"])
+    document["timestamp"] = datetime.strptime(document["timestamp"], '%Y-%m-%d %H:%M:%S').isoformat()
+
+# Create a DataFrame for easier manipulation
+df = pd.DataFrame(data)
+df['average_moist'] = (df['moist1'] + df['moist2']) / 2
+df['smoothed_average_moist'] = df['average_moist'].rolling(window=5).mean()
+
+# Convert DataFrame back to dictionary
+data = df.to_dict(orient='records')
 
 # Write data to JSON file
 with open("data.json", "w") as file:
     json.dump(data, file, indent=4)
 
 print("Data has been written to data.json")
-# result: {'_id': ObjectId('6698478b61db402b45ed003f'), 'timestamp': '2024-07-18 00:36:59', 'topic': 'moisture', 'moist1': 12, 'perc1': 20, 'moist2': 4234, 'perc2': 30}
