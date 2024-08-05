@@ -21,32 +21,42 @@
     <div id="graph"></div>
     <script>
         // Fetch data from the JSON file
-        fetch('https://raw.githubusercontent.com/andrbmgi/growpagegen/main/data.json')
+        fetch('data.json')
             .then(response => response.json())
             .then(data => {
                 // Process data for Plotly
-                const xData = data.map(item => item['your_x_field']);
-                const yData = data.map(item => item['your_y_field']);
+                const timestamps = data.map(item => item['timestamp']);
+                const invertedMoist1 = data.map(item => -item['moist1']);
+                const invertedMoist2 = data.map(item => -item['moist2']);
 
-                const trace = {
-                    x: xData,
-                    y: yData,
+                const trace1 = {
+                    x: timestamps,
+                    y: invertedMoist1,
                     mode: 'lines+markers',
+                    name: 'Inverted Moist1',
+                    type: 'scatter'
+                };
+
+                const trace2 = {
+                    x: timestamps,
+                    y: invertedMoist2,
+                    mode: 'lines+markers',
+                    name: 'Inverted Moist2',
                     type: 'scatter'
                 };
 
                 const layout = {
-                    title: 'Your Graph Title',
+                    title: 'Moisture Data Over Time',
                     xaxis: {
-                        title: 'X Axis Title',
+                        title: 'Time',
                         rangeslider: {}
                     },
                     yaxis: {
-                        title: 'Y Axis Title'
+                        title: 'Inverted Moisture Values'
                     }
                 };
 
-                Plotly.newPlot('graph', [trace], layout);
+                Plotly.newPlot('graph', [trace1, trace2], layout);
             });
     </script>
 </body>
