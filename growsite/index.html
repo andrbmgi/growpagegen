@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Data Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #graph {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Data Visualization</h1>
+    <div id="graph"></div>
+    <script>
+        // Fetch data from the JSON file
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Process data for Plotly
+                const xData = data.map(item => item['your_x_field']);
+                const yData = data.map(item => item['your_y_field']);
+
+                const trace = {
+                    x: xData,
+                    y: yData,
+                    mode: 'lines+markers',
+                    type: 'scatter'
+                };
+
+                const layout = {
+                    title: 'Your Graph Title',
+                    xaxis: {
+                        title: 'X Axis Title',
+                        rangeslider: {}
+                    },
+                    yaxis: {
+                        title: 'Y Axis Title'
+                    }
+                };
+
+                Plotly.newPlot('graph', [trace], layout);
+            });
+    </script>
+</body>
+</html>

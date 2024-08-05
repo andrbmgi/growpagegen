@@ -37,6 +37,18 @@ def find_data(collection, query):
 
 
 collection = connect_db()
-result = find_data(collection=collection, query={})
-print(result)
+#result = find_data(collection=collection, query={})
+
+# Fetch all data
+data = list(collection.find({}))
+
+# Convert MongoDB documents to JSON serializable format
+for document in data:
+    document["_id"] = str(document["_id"])
+
+# Write data to JSON file
+with open("data.json", "w") as file:
+    json.dump(data, file, indent=4)
+
+print("Data has been written to data.json")
 # result: {'_id': ObjectId('6698478b61db402b45ed003f'), 'timestamp': '2024-07-18 00:36:59', 'topic': 'moisture', 'moist1': 12, 'perc1': 20, 'moist2': 4234, 'perc2': 30}
