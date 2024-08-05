@@ -13660,5 +13660,16 @@
         "perc2": 100,
         "average_moist": 1638.5,
         "smoothed_average_moist": 1632.7
+    },
+    {
+        "_id": "66b15ec12e3360643cafe8f4",
+        "timestamp": "2024-08-06T01:22:41",
+        "topic": "moisture",
+        "moist1": 1601,
+        "perc1": 100,
+        "moist2": 1662,
+        "perc2": 100,
+        "average_moist": 1631.5,
+        "smoothed_average_moist": 1632.4
     }
 ]
