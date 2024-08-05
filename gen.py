@@ -54,6 +54,9 @@ df = pd.DataFrame(data)
 df['average_moist'] = (df['moist1'] + df['moist2']) / 2
 df['smoothed_average_moist'] = df['average_moist'].rolling(window=5).mean()
 
+# Fill NaN values in 'smoothed_average_moist' with 'average_moist'
+df['smoothed_average_moist'].fillna(df['average_moist'], inplace=True)
+
 # Convert DataFrame back to dictionary
 data = df.to_dict(orient='records')
 
