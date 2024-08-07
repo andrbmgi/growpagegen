@@ -8,6 +8,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Only run during daytime
+if [ $(date +%H) -ge 22 ] || [ $(date +%H) -lt 5 ]; then
+  echo "It is dark outside. Exiting."
+  exit 0
+fi
+
 # Path to the virtual environment
 VENV_PATH="venv"
 
