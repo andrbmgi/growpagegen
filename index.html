@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MongoDB Data Visualization</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="images.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,6 +14,12 @@
         #graph {
             width: 100%;
             height: 600px;
+        }
+        #hover-image {
+            position: absolute;
+            display: none;
+            width: 400px;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -118,7 +125,14 @@
                         Plotly.relayout('graph', 'yaxis.range', newYRange);
                     }
                 });
+
+                document.getElementById('graph').on('plotly_afterplot', () => {
+                    console.log('Graph has been fully rendered');
+                    initializeHoverFunctionality();
+                });
             });
     </script>
+
+    <img id="hover-image" src="" alt="Hover Image">
 </body>
 </html>
