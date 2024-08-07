@@ -30,9 +30,12 @@ fi
 
 # Add changes to git
 git add data.json
-
-# Commit the changes
 git commit -m "Update data.json with latest data"
+
+# Download image
+"$VENV_PATH/bin/python" image_downloader.py
+git add .
+git commit -m "Current image"
 
 # Push the changes to the repository
 git push
