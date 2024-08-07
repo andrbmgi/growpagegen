@@ -34,6 +34,14 @@ git commit -m "Update data.json with latest data"
 
 # Download image
 "$VENV_PATH/bin/python" image_downloader.py
+
+# Check if image_downloader.py ran successfully
+if [ $? -ne 0 ]; then
+  echo "image_downloader.py script failed to run."
+  deactivate
+  exit 1
+fi
+
 git add .
 git commit -m "Current image"
 
