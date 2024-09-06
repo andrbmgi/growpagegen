@@ -44416,5 +44416,49 @@
         "perc2": 100,
         "average_moist": 1806.0,
         "smoothed_average_moist": 1800.8
+    },
+    {
+        "_id": "66db0cc128a60935267c9964",
+        "timestamp": "2024-09-06T16:08:01",
+        "topic": "moisture",
+        "moist1": 1792,
+        "perc1": 100,
+        "moist2": 1820,
+        "perc2": 100,
+        "average_moist": 1806.0,
+        "smoothed_average_moist": 1802.3
+    },
+    {
+        "_id": "66db104b28a60935267c9966",
+        "timestamp": "2024-09-06T16:23:07",
+        "topic": "moisture",
+        "moist1": 1791,
+        "perc1": 100,
+        "moist2": 1823,
+        "perc2": 100,
+        "average_moist": 1807.0,
+        "smoothed_average_moist": 1805.1
+    },
+    {
+        "_id": "66db13d528a60935267c9968",
+        "timestamp": "2024-09-06T16:38:13",
+        "topic": "moisture",
+        "moist1": 1808,
+        "perc1": 100,
+        "moist2": 1823,
+        "perc2": 100,
+        "average_moist": 1815.5,
+        "smoothed_average_moist": 1808.7
+    },
+    {
+        "_id": "66db175b28a60935267c996a",
+        "timestamp": "2024-09-06T16:53:15",
+        "topic": "moisture",
+        "moist1": 1768,
+        "perc1": 100,
+        "moist2": 1811,
+        "perc2": 100,
+        "average_moist": 1789.5,
+        "smoothed_average_moist": 1804.8
     }
 ]
